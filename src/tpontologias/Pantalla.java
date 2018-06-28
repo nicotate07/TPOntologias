@@ -12,6 +12,8 @@ import com.complexible.stardog.api.reasoning.ReasoningConnection;
 import javax.swing.JComboBox;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
+import com.complexible.stardog.api.DriverManager;
+
 
 /**
  *
@@ -25,6 +27,7 @@ public class Pantalla extends javax.swing.JFrame {
 	public Pantalla() {
 		initComponents();
 		instancia = this;
+                instancia.conectarServidor("myDB","admin","admin","http://localhost:5820");
 	}
 
 	public static void conectarServidor(String nombreDB, String usuario, String contrasena, String servidor) throws StardogException{
@@ -212,7 +215,7 @@ public class Pantalla extends javax.swing.JFrame {
 				+ "?comision rdf:type :Comision."
 				+ "?curso rdf:type :Curso."
 				+ "?alumno :inscripto_en ?comision."
-				+ "?comision :pertenece_a ?curso.";
+				+ "?comision :pertenece_a ?curso. }";
 
 		SelectQuery q = conexionStardog.select(query); //Se crea la query en funcion de la cadena
 		TupleQueryResult resultado = q.execute(); //Se ejecuta la consulta y se devuelven los resultados
